@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Doctor dashboard | CarePath AI{% endblock %}
+{% block content %}
+<section class="dashboard-hero">
+  <span class="eyebrow">DOCTOR WORKSPACE</span><h1 class="dashboard-title">Welcome, Dr. {{ current_user.full_name }}.</h1>
+  <p>Demo appointment requests for your assigned hospital: <strong>{{ hospital_name }}</strong>.</p>
+  <span class="demo-tag">AUTHORIZED DEMO ACCOUNT • SAMPLE DATA</span>
+</section>
+<section class="section section-tint">
+  <div class="section-heading row-heading"><div><span class="eyebrow">PATIENT REQUESTS</span><h2>Appointment requests</h2><p>Only requests associated with your assigned sample hospital are shown.</p></div><a class="btn btn-outline" href="{{ url_for('doctor_dashboard') }}">Refresh ↻</a></div>
+  <div class="panel table-wrap"><table><thead><tr><th>Request ID</th><th>Patient</th><th>Preferred time</th><th>Status</th></tr></thead><tbody>
+  {% for appointment in appointments %}<tr><td>#{{ appointment.id }}</td><td>{{ appointment.patient_name }}</td><td>{{ appointment.preferred_time }}</td><td><span class="status-pill">{{ appointment.status|title }}</span></td></tr>
+  {% else %}<tr><td colspan="4">No patient-linked demo requests for this hospital yet.</td></tr>{% endfor %}
+  </tbody></table></div>
+</section>
+<section class="notice"><b>Privacy reminder</b><span>This demo contains test records only. Do not use it to manage real patient data or make clinical decisions.</span></section>
+{% endblock %}
