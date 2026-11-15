@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}CarePath AI | Smart Healthcare{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <span class="eyebrow">SMARTER ACCESS TO CARE</span>
+    <h1>Healthcare,<br><em>without the guesswork.</em></h1>
+    <p>Explore care options, review clearly labelled sample queue estimates and organize a consultation request through your patient account.</p>
+    <div class="hero-actions">
+      {% if current_user %}<a class="btn" href="{{ url_for('dashboard') }}">Open dashboard →</a>{% else %}<a class="btn" href="{{ url_for('register') }}">Create free account →</a><a class="text-link" href="{{ url_for('login') }}">Already registered? Sign in</a>{% endif %}
+    </div>
+    <div class="trust-line"><span class="pulse"></span> Patient-first • Simple • Connected</div>
+  </div>
+  <div class="hero-card">
+    <div class="mini-top"><span>CAREPATH OVERVIEW</span><span class="live-dot">● PROTOTYPE</span></div>
+    <div class="health-icon">✚</div><h3>Your care journey, organized.</h3>
+    <p>Hospital discovery, demo appointment requests and separate patient and doctor workspaces.</p>
+    <div class="mini-stats"><div><strong>3</strong><small>Sample hospitals</small></div><div><strong>2</strong><small>Account roles</small></div></div>
+    <div class="route-line"><span>PATIENT</span><i></i><span>CARE</span><i></i><span>DOCTOR</span></div>
+  </div>
+</section>
+
+<section class="notice"><b>Prototype notice</b><span>Hospital listings and queue estimates are illustrative sample data, not live information. Appointment requests are not confirmed bookings. This app does not contact hospitals, ambulances or emergency services.</span></section>
+
+<section id="how" class="section">
+  <div class="section-heading"><span class="eyebrow">ONE CONNECTED JOURNEY</span><h2>Care that moves with you.</h2><p>Stage 2 adds sign-in, protected patient and doctor dashboards, and password hashing.</p></div>
+  <div class="feature-grid">
+    <article class="feature"><div class="feature-icon">⌕</div><h3>Find hospitals</h3><p>Explore the three sample hospitals in the prototype.</p></article>
+    <article class="feature"><div class="feature-icon">◷</div><h3>Sample queue</h3><p>See an illustrative estimate only, never a live hospital queue.</p></article>
+    <article class="feature"><div class="feature-icon">♙</div><h3>Protected accounts</h3><p>Patients and verified doctors have separate dashboard access.</p></article>
+    <article class="feature"><div class="feature-icon">♡</div><h3>Appointment requests</h3><p>Patients can save a demo request and view their own requests.</p></article>
+  </div>
+</section>
+
+<section id="hospitals" class="section section-tint">
+  <div class="section-heading row-heading"><div><span class="eyebrow">HOSPITAL DISCOVERY</span><h2>Explore care options</h2><p>These entries are examples for testing only.</p></div><span class="demo-tag">SAMPLE DATA — NOT LIVE</span></div>
+  <div id="hospitalList" class="hospital-grid"><div class="loading">Loading sample hospitals…</div></div>
+</section>
+
+<section class="emergency-band">
+  <div><span class="eyebrow light">NEED URGENT HELP?</span><h2>Don't wait for this demo app.</h2><p>For a medical emergency in India, call 112 or your local emergency service immediately. CarePath AI is not connected to emergency dispatch and cannot send an ambulance or notify a hospital.</p></div>
+  <a class="btn btn-light" href="tel:112">Call 112</a>
+</section>
+{% endblock %}

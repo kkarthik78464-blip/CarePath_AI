@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Patient dashboard | CarePath AI{% endblock %}
+{% block content %}
+<section class="dashboard-hero">
+  <span class="eyebrow">PATIENT WORKSPACE</span><h1 class="dashboard-title">Hello, {{ current_user.full_name }}.</h1>
+  <p>Manage your demonstration appointment requests and explore sample hospitals.</p>
+  <span class="demo-tag">PROTOTYPE — NOT A LIVE HOSPITAL SERVICE</span>
+</section>
+<section class="dashboard-grid section-tight">
+  <div class="panel dashboard-panel">
+    <div class="section-heading"><span class="eyebrow">PLAN AHEAD</span><h2>Request an appointment</h2><p>Your name and phone are taken from your signed-in profile.</p></div>
+    <form id="appointmentForm" class="auth-form">
+      <label>Choose sample hospital<select name="hospital_id" id="hospitalSelect" required><option value="">Select hospital</option>{% for hospital in hospitals %}<option value="{{ hospital.id }}">{{ hospital.name }}</option>{% endfor %}</select></label>
+      <label>Preferred date and time<input name="preferred_time" type="datetime-local" required></label>
+      <button class="btn full" type="submit">Send demo request →</button>
+      <p id="appointmentMessage" class="form-message" aria-live="polite"></p>
+    </form>
+  </div>
+  <div class="panel dashboard-panel">
+    <div class="section-heading"><span class="eyebrow">YOUR PROFILE</span><h2>Account details</h2></div>
+    <dl class="profile-list"><dt>Name</dt><dd>{{ current_user.full_name }}</dd><dt>Email</dt><dd>{{ current_user.email }}</dd><dt>Phone</dt><dd>{{ current_user.phone }}</dd><dt>Role</dt><dd>Patient</dd></dl>
+    <p class="small-note">Only your own appointment requests are shown in this dashboard.</p>
+  </div>
+</section>
+<section class="section section-tint">
+  <div class="section-heading"><span class="eyebrow">YOUR ACTIVITY</span><h2>Appointment requests</h2><p>These are saved demo requests, not confirmed bookings.</p></div>
+  <div class="panel table-wrap"><table><thead><tr><th>Request ID</th><th>Hospital</th><th>Preferred time</th><th>Status</th></tr></thead><tbody>
+  {% for appointment in appointments %}<tr><td>#{{ appointment.id }}</td><td>{{ appointment.hospital_name }}</td><td>{{ appointment.preferred_time }}</td><td><span class="status-pill">{{ appointment.status|title }}</span></td></tr>
+  {% else %}<tr><td colspan="4">You have not submitted a demo appointment request yet.</td></tr>{% endfor %}
+  </tbody></table></div>
+</section>
+<section class="notice"><b>Emergency</b><span>For urgent medical help, call 112 in India. This prototype does not contact emergency services or dispatch ambulances.</span></section>
+{% endblock %}

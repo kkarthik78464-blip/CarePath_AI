@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Create account | CarePath AI{% endblock %}
+{% block content %}
+<section class="auth-section">
+  <div class="auth-card auth-card-wide">
+    <span class="eyebrow">GET STARTED</span><h1 class="auth-title">Create your account.</h1>
+    <p class="auth-intro">Patient accounts are enabled immediately. Doctor accounts require manual verification before doctor-dashboard access.</p>
+    <form method="post" class="auth-form" id="registerForm">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label>Account type<select name="role" id="roleSelect"><option value="patient">Patient</option><option value="doctor">Doctor / healthcare professional</option></select></label>
+      <div class="form-two-col">
+        <label>Full name<input name="full_name" required minlength="2" maxlength="80" autocomplete="name" placeholder="Your full name"></label>
+        <label>Phone number<input name="phone" required inputmode="tel" autocomplete="tel" maxlength="20" placeholder="Your phone number"></label>
+      </div>
+      <label>Email address<input type="email" name="email" required maxlength="254" autocomplete="email" placeholder="you@example.com"></label>
+      <div id="doctorFields" class="doctor-fields" hidden>
+        <label>Hospital affiliation<select name="hospital_id" id="hospitalId"><option value="">Choose sample hospital</option>{% for hospital in hospitals %}<option value="{{ hospital.id }}">{{ hospital.name }} — SAMPLE</option>{% endfor %}</select></label>
+        <label>Professional registration ID<input name="professional_id" id="professionalId" maxlength="80" placeholder="Enter registration ID"></label>
+        <p class="small-note">Prototype only: submitting these details does not verify a professional licence. An authorized administrator must verify credentials before approval.</p>
+      </div>
+      <div class="form-two-col">
+        <label>Password<input type="password" name="password" required minlength="10" maxlength="128" autocomplete="new-password" placeholder="At least 10 characters"></label>
+        <label>Confirm password<input type="password" name="confirm_password" required minlength="10" maxlength="128" autocomplete="new-password" placeholder="Re-enter password"></label>
+      </div>
+      <p class="password-hint">Use at least 10 characters, including a letter and a number.</p>
+      <button class="btn full" type="submit">Create account →</button>
+    </form>
+    <p class="auth-switch">Already registered? <a href="{{ url_for('login') }}">Sign in</a></p>
+  </div>
+</section>
+{% endblock %}
